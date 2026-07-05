@@ -3,7 +3,7 @@
 
 Omar Zoghbi – s0585282
 
-Nowroze Adel Butt – s058505
+Nowroze Adel Butt – s0585051
 
 
 Frontend Link : https://github.com/OmarZoghbi/online-shop-frontend.git
