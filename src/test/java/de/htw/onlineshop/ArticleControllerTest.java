@@ -175,4 +175,25 @@ class ArticleControllerTest {
         verify(articleService).createArticle(any(Article.class));
     }
 
+    @Test
+    @DisplayName("should toggle product availability and return status 200")
+    void updateProductCanToggleAvailability() throws Exception {
+        Article input = createArticle(null, "Laptop", BigDecimal.valueOf(899.99), "Elektronik");
+        input.setAvailable(false);
+
+        Article updated = createArticle(1L, "Laptop", BigDecimal.valueOf(899.99), "Elektronik");
+        updated.setAvailable(false);
+
+        when(articleService.updateArticle(eq(1L), any(Article.class))).thenReturn(updated);
+
+        mockMvc.perform(put("/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.available").value(false));
+
+        verify(articleService).updateArticle(eq(1L), any(Article.class));
+    }
+
 }
